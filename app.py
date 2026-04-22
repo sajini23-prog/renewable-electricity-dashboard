@@ -2,17 +2,13 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
-# -------------------------------------------------
-# Page configuration
-# -------------------------------------------------
+#Page configuration
 st.set_page_config(
     page_title="Renewable Electricity Dashboard",
     layout="wide"
 )
 
-# -------------------------------------------------
-# Custom styling
-# -------------------------------------------------
+#Styling
 st.markdown("""
 <style>
     .stApp {
@@ -174,9 +170,7 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# -------------------------------------------------
-# Helper functions
-# -------------------------------------------------
+#Helper Functions
 @st.cache_data
 def load_data():
     df = pd.read_csv("data/final_renewable_electricity.csv")
@@ -217,17 +211,13 @@ def insight_card(title, text, stroke_color):
         unsafe_allow_html=True
     )
 
-# -------------------------------------------------
-# Load data
-# -------------------------------------------------
+#Load data
 df = load_data()
 years = sorted(df["Year"].unique())
 countries = sorted(df["Country Name"].unique())
 latest_year = max(years)
 
-# -------------------------------------------------
-# Color palettes
-# -------------------------------------------------
+#Colour palettes
 discrete_palette = ["#8B5CF6", "#3B82F6", "#38BDF8", "#14B8A6", "#6366F1", "#06B6D4"]
 continuous_scale = [
     [0.0, "#8B5CF6"],
@@ -237,9 +227,7 @@ continuous_scale = [
     [1.0, "#14B8A6"]
 ]
 
-# -------------------------------------------------
-# Sidebar navigation
-# -------------------------------------------------
+#Navigation bar
 st.sidebar.markdown('<div class="sidebar-box">', unsafe_allow_html=True)
 st.sidebar.markdown('<div class="sidebar-title">Navigation</div>', unsafe_allow_html=True)
 
@@ -269,9 +257,7 @@ st.sidebar.markdown(
 )
 st.sidebar.markdown('</div>', unsafe_allow_html=True)
 
-# -------------------------------------------------
-# Title area
-# -------------------------------------------------
+#Title
 st.markdown('<div class="dashboard-title">Renewable Electricity Dashboard</div>', unsafe_allow_html=True)
 st.markdown(
     """
@@ -284,9 +270,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# -------------------------------------------------
-# Section: Overview
-# -------------------------------------------------
+#Section overview
 if section == "Overview":
     st.markdown('<div class="section-title">Overview</div>', unsafe_allow_html=True)
 
@@ -344,9 +328,7 @@ if section == "Overview":
 
     st.plotly_chart(fig_overview, use_container_width=True)
 
-# -------------------------------------------------
-# Section: Top 10 Ranking
-# -------------------------------------------------
+#Top 10 ranking
 elif section == "Top 10 Ranking":
     st.markdown('<div class="section-title">Top 10 Ranking</div>', unsafe_allow_html=True)
 
@@ -407,9 +389,7 @@ elif section == "Top 10 Ranking":
     ranking_table["Renewable Output"] = ranking_table["Renewable Output"].round(2)
     st.dataframe(ranking_table, use_container_width=True, hide_index=True)
 
-# -------------------------------------------------
-# Section: Comparison Analysis
-# -------------------------------------------------
+#Comparison analysis
 elif section == "Comparison Analysis":
     st.markdown('<div class="section-title">Comparison Analysis</div>', unsafe_allow_html=True)
 
@@ -498,9 +478,7 @@ elif section == "Comparison Analysis":
     else:
         st.warning("Please select at least one country and one year.")
 
-# -------------------------------------------------
-# Section: Trend Over Time
-# -------------------------------------------------
+#Trend over time
 elif section == "Trend Over Time":
     st.markdown('<div class="section-title">Trend Over Time</div>', unsafe_allow_html=True)
 
@@ -563,9 +541,7 @@ elif section == "Trend Over Time":
     else:
         st.warning("Please select at least one country.")
 
-# -------------------------------------------------
-# Section: World Map
-# -------------------------------------------------
+#World map
 elif section == "World Map":
     st.markdown('<div class="section-title">World Map</div>', unsafe_allow_html=True)
 
@@ -599,9 +575,7 @@ elif section == "World Map":
 
     st.plotly_chart(fig_map, use_container_width=True)
 
-# -------------------------------------------------
-# Section: Filtered Table
-# -------------------------------------------------
+#Filtered table
 elif section == "Filtered Table":
     st.markdown('<div class="section-title">Filtered Table</div>', unsafe_allow_html=True)
 
@@ -639,9 +613,7 @@ elif section == "Filtered Table":
         hide_index=True
     )
 
-# -------------------------------------------------
-# Section: Insight Summary
-# -------------------------------------------------
+#Insight summary
 elif section == "Insight Summary":
     st.markdown('<div class="section-title">Insight Summary</div>', unsafe_allow_html=True)
 
@@ -683,9 +655,7 @@ elif section == "Insight Summary":
             "#14B8A6"
         )
 
-# -------------------------------------------------
-# Section: Change Between Two Years
-# -------------------------------------------------
+#Chnage between two years
 elif section == "Change Between Two Years":
     st.markdown('<div class="section-title">Change Between Two Years</div>', unsafe_allow_html=True)
 
